@@ -21,8 +21,18 @@ class TestSort(unittest.TestCase):
         self.assertEqual([1, 1, 2, 4, 5, 5, 6, 6], returned_list)
 
     def test_quicksort(self):
-        sort.quick_sort(self.list)
+        sort.quick_sort(0, len(self.list), self.list)
+
         self.assertTrue(self.in_order(self.list))
+
+    def test_partition(self):
+        pivot_index = sort.partition(0, len(self.list), self.list)
+
+        for e in self.list[0:pivot_index]:
+            self.assertGreaterEqual(self.list[pivot_index], e)
+ 
+        for e in self.list[pivot_index:]:
+            self.assertGreaterEqual(e, self.list[pivot_index])
 
     def in_order(self, numbers):
         accumulator = True

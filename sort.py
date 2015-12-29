@@ -1,8 +1,34 @@
 # -*- coding: utf-8 -*-
 
 
-def quick_sort(list):
-    pass
+def quick_sort(begin, end, list):
+    if begin >= end:
+        return
+
+    pivot_index = partition(begin, end, list)
+
+    quick_sort(begin, pivot_index, list)
+    quick_sort(pivot_index + 1, end, list)
+
+    print(list[begin:end])
+
+
+def partition(begin, end, list):
+    pivot = list[end-1]
+
+    pivot_index = begin
+    for i in range(begin, end):
+        if list[i] < pivot:
+            swap(i, pivot_index, list)
+            pivot_index = pivot_index + 1
+
+    swap(pivot_index, end-1, list)
+
+    return pivot_index
+
+
+def swap(index1, index2, list):
+    list[index1], list[index2] = list[index2], list[index1]
 
 
 def merge_sort(list):
